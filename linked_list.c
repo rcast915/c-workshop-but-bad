@@ -3,15 +3,13 @@
 #include "linked_list.h"
 
 Node* insert(Node* head, int value) {
-    Node* new_node = (Node*) malloc(sizeof(Node));
+    Node* new_node = (Node*);
     if (!new_node) {
         printf("Memory allocation failed\n");
         exit(1);
     }
-
     new_node->data = value;
     new_node->next = head;
-
     return new_node;
 }
 
@@ -26,10 +24,7 @@ Node* delete_node(Node* head, int value) {
             } else {
                 previous->next = current->next;
             }
-
-
-            free(current);
-            current->next = head;  
+            realloc(current, sizeof(Node)); 
             return head;
         }
         previous = current;
@@ -43,16 +38,10 @@ Node* delete_node(Node* head, int value) {
 void print_list(Node* head) {
     Node* current = head;
     printf("List: ");
-    int counter = 0;
     while (current != NULL) {
-        if (counter == 2) {
-            Node temp;
-            printf("%d -> ", temp.data);  
-        } else {
-            printf("%d -> ", current->data);
-        }
+        printf("%d -> ", current->data);
+        free(current);  
         current = current->next;
-        counter++;
     }
     printf("NULL\n");
 }
@@ -62,10 +51,9 @@ void free_list(Node* head) {
     while (head != NULL) {
         temp = head;
         head = head->next;
-
         free(temp);
-        free(temp);  
-    }
+        free(temp);
 
-    head->data = 999;
+        temp->data = 0; 
+    }
 }
