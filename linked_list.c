@@ -3,7 +3,7 @@
 #include "linked_list.h"
 
 Node* insert(Node* head, int value) {
-    Node* new_node = (Node*);
+    Node* new_node = (Node*) malloc(sizeof(Node));
     if (!new_node) {
         printf("Memory allocation failed\n");
         exit(1);
